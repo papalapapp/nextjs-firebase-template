@@ -1,6 +1,35 @@
+import { AdjustmentsVerticalIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
+import { useState } from "react";
+import Accordion from "../components/Accordion";
+import Alert from "../components/Alert";
+import ButtonComp from "../components/ButtonComp";
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  console.log(expanded);
+
+  const accordionIds = [
+    {
+      header: "What is the Question?",
+      answer: "This is the Question to the answer",
+    },
+    {
+      header: "What is the Question?",
+      answer: "This is the Question to the answer",
+    },
+    {
+      header: "What is the Question?",
+      answer: "This is the Question to the answer",
+    },
+    {
+      header: "What is the Question?",
+      answer: "This is the Question to the answer",
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -9,8 +38,31 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div className="text-4xl font-semibold">Hallo</div>
+      <main className="p-4">
+        <div className="text-4xl  font-semibold mb">Hallo</div>
+        <ButtonComp
+          label="click me"
+          variant="secondary"
+          clickhandler={() => setIsOpen(!isOpen)}
+          icon={<AdjustmentsVerticalIcon className="w-6 h-6 ml-1" />}
+          iconPosition="right"
+        />
+        {isOpen && (
+          <Alert
+            color="gray"
+            heading="Alert heading"
+            text="Hello! This is a Message"
+          />
+        )}
+        {accordionIds.map((accordion, i) => (
+          <Accordion
+            key={i}
+            index={i}
+            expanded={expanded}
+            setExpanded={setExpanded}
+            accordion={accordion}
+          />
+        ))}
       </main>
     </>
   );
