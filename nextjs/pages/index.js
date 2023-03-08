@@ -1,23 +1,28 @@
-import { AdjustmentsVerticalIcon } from "@heroicons/react/24/solid";
+import { AdjustmentsVerticalIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState } from "react";
 import Accordion from "../components/Accordion";
 import Alert from "../components/Alert";
 import ButtonComp from "../components/ButtonComp";
 import Carousel from "../components/Carousel";
+import Dropdown from "../components/Dropdown";
+import SlideOver from "../components/SlideOver";
 
 export default function Home() {
-
-
-
   const images = [
-    'https://images.unsplash.com/photo-1506527240747-720a3e17b910?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80',
-    'https://images.unsplash.com/photo-1454452176678-c0437432bba6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1599383885524-8ab14dee8249?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
+    "https://images.unsplash.com/photo-1506527240747-720a3e17b910?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80",
+    "https://images.unsplash.com/photo-1454452176678-c0437432bba6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    "https://images.unsplash.com/photo-1599383885524-8ab14dee8249?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
     "https://images.unsplash.com/photo-1589730349861-f17e3939c207?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
     "https://images.unsplash.com/photo-1533293046890-f1ab3e5e3af9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
     "https://images.unsplash.com/photo-1626869709532-0d1462483e23?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
-  ]
+  ];
+
+  const items = [
+    { label: "Option 1 sjhjdh sidsjd", href: "#" },
+    { label: "Option 2 skdsdj", href: "#" },
+    { label: "Option 3 skdjdj", href: "#" },
+  ];
 
   return (
     <>
@@ -27,8 +32,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="p-4">
+      <main className="p-12">
         <div className="text-4xl  font-semibold mb">Hallo</div>
+
         <ButtonComp
           label="click me"
           variant="secondary"
@@ -36,6 +42,28 @@ export default function Home() {
           icon={<AdjustmentsVerticalIcon className="w-6 h-6 ml-1" />}
           iconPosition="right"
         />
+
+        <div className="m-4">
+          <Dropdown 
+          buttonLabel={
+          <div className="flex rounded-lg bg-gray-100 text-gray-800 py-2 px-5">
+            Select
+            <ChevronDownIcon className="w-6 h-6"/>
+          </div>} 
+          items={items}>
+            <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+              1 Option
+            </div>
+    
+            <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+              1 Option
+            </div>
+            <hr />
+            <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+              1 Option
+            </div>
+          </Dropdown>
+        </div>
 
         <div className="h-[800px]">
           <Carousel images={images} />
