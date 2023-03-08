@@ -4,7 +4,27 @@ import React from "react";
 
 function Accordion({ index, expanded, setExpanded, accordion }) {
   const isOpen = index === expanded;
-  console.log(isOpen);
+
+  // const [expanded, setExpanded] = useState(false);
+//   const accordionIds = [
+//     {
+//       header: "What is the Question?",
+//       answer: "This is the Question to the answer",
+//     },
+//     {
+//       header: "What is the Question?",
+//       answer: "This is the Question to the answer",
+//     },
+//     {
+//       header: "What is the Question?",
+//       answer: "This is the Question to the answer",
+//     },
+//     {
+//       header: "What is the Question?",
+//       answer: "This is the Question to the answer",
+//     },
+//   ];
+
   return (
     <>
       <motion.header

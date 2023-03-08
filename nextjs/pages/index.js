@@ -4,31 +4,20 @@ import { useState } from "react";
 import Accordion from "../components/Accordion";
 import Alert from "../components/Alert";
 import ButtonComp from "../components/ButtonComp";
+import Carousel from "../components/Carousel";
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [expanded, setExpanded] = useState(false);
 
-  console.log(expanded);
 
-  const accordionIds = [
-    {
-      header: "What is the Question?",
-      answer: "This is the Question to the answer",
-    },
-    {
-      header: "What is the Question?",
-      answer: "This is the Question to the answer",
-    },
-    {
-      header: "What is the Question?",
-      answer: "This is the Question to the answer",
-    },
-    {
-      header: "What is the Question?",
-      answer: "This is the Question to the answer",
-    },
-  ];
+
+  const images = [
+    'https://images.unsplash.com/photo-1506527240747-720a3e17b910?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80',
+    'https://images.unsplash.com/photo-1454452176678-c0437432bba6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    'https://images.unsplash.com/photo-1599383885524-8ab14dee8249?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
+    "https://images.unsplash.com/photo-1589730349861-f17e3939c207?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    "https://images.unsplash.com/photo-1533293046890-f1ab3e5e3af9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
+    "https://images.unsplash.com/photo-1626869709532-0d1462483e23?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
+  ]
 
   return (
     <>
@@ -43,26 +32,14 @@ export default function Home() {
         <ButtonComp
           label="click me"
           variant="secondary"
-          clickhandler={() => setIsOpen(!isOpen)}
+          clickhandler={() => console.log("click")}
           icon={<AdjustmentsVerticalIcon className="w-6 h-6 ml-1" />}
           iconPosition="right"
         />
-        {isOpen && (
-          <Alert
-            color="gray"
-            heading="Alert heading"
-            text="Hello! This is a Message"
-          />
-        )}
-        {accordionIds.map((accordion, i) => (
-          <Accordion
-            key={i}
-            index={i}
-            expanded={expanded}
-            setExpanded={setExpanded}
-            accordion={accordion}
-          />
-        ))}
+
+        <div className="h-[800px]">
+          <Carousel images={images} />
+        </div>
       </main>
     </>
   );
