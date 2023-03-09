@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const imageVariants = {
   enter: (direction) => {
     return {
-      x: direction === "right" ? 1000 : -1000,
+      x: direction === "right" ? 100 : -100,
       opacity: 0,
     };
   },
@@ -18,7 +18,7 @@ const imageVariants = {
   exit: (direction) => {
     return {
       zIndex: 0,
-      x: direction === "right" ? -1000 : 1000,
+      x: direction === "right" ? -100 : 100,
       opacity: 0,
     };
   },
@@ -67,9 +67,9 @@ const Carousel = ({ images }) => {
         animate="center"
         exit="exit"
         custom={direction}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
           <Image
             src={images[currentIndex]}
             alt="Carousel Image"

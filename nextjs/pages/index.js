@@ -1,4 +1,7 @@
-import { AdjustmentsVerticalIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
+import {
+  AdjustmentsVerticalIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/solid";
 import Head from "next/head";
 import React, { useState } from "react";
 import Accordion from "../components/Accordion";
@@ -6,9 +9,11 @@ import Alert from "../components/Alert";
 import ButtonComp from "../components/ButtonComp";
 import Carousel from "../components/Carousel";
 import Dropdown from "../components/Dropdown";
+import Modal from "../components/Modal";
 import SlideOver from "../components/SlideOver";
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
   const images = [
     "https://images.unsplash.com/photo-1506527240747-720a3e17b910?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80",
     "https://images.unsplash.com/photo-1454452176678-c0437432bba6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
@@ -44,29 +49,72 @@ export default function Home() {
         />
 
         <div className="m-4">
-          <Dropdown 
-          buttonLabel={
-          <div className="flex rounded-lg bg-gray-100 text-gray-800 py-2 px-5">
-            Select
-            <ChevronDownIcon className="w-6 h-6"/>
-          </div>} 
-          items={items}>
-            <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+          <Dropdown
+            buttonLabel={
+              <div className="flex rounded-lg bg-gray-100 text-gray-800 py-2 px-5">
+                Select
+                <ChevronDownIcon className="w-6 h-6" />
+              </div>
+            }
+            items={items}
+          >
+            <div className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
               1 Option
             </div>
-    
-            <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+
+            <div className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
               1 Option
             </div>
             <hr />
-            <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+            <div className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
               1 Option
             </div>
           </Dropdown>
         </div>
 
-        <div className="h-[800px]">
+        <div className="h-[300px] w-1/2 mx-auto">
           <Carousel images={images} />
+        </div>
+
+        <div className="ml-6 mt-5">
+          <ButtonComp
+            label="Open Modal"
+            variant="primary"
+            clickhandler={() => setIsOpen(true)}
+          />
+          <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+            <h2 className="text-2xl font-semibold mb-2">Modal Title</h2>
+            <hr />
+            <div className="pt-4 pb-4 min-h-[200px]">
+              <Alert
+                color="gray"
+                heading="Succesvoll Order"
+                text="You have received a conformation letter"
+              />
+              <p className="pt-4">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
+                aspernatur beatae temporibus aut natus minima tenetur accusamus
+                aperiam ab recusandae. Iure quae, sit deleniti suscipit labore
+                quo nam beatae ullam.
+              </p>
+            </div>
+            <hr />
+            <div className="flex justify-end mt-4">
+              <div className="mr-4">
+                <ButtonComp
+                  label="Decline"
+                  variant="secondary"
+                  clickhandler={() => setIsOpen(false)}
+                />
+              </div>
+
+              <ButtonComp
+                label="Accept"
+                variant="primary"
+                clickhandler={() => setIsOpen(true)}
+              />
+            </div>
+          </Modal>
         </div>
       </main>
     </>
