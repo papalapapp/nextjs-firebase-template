@@ -20,8 +20,6 @@ function Alert({ color, heading, text }) {
     gray: "hover:bg-gray-200",
   }
 
-  console.log(colorVariants[color]);
-
   return (
     <AnimatePresence>
       {isOpen && (

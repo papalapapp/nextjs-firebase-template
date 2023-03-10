@@ -9,8 +9,10 @@ import Alert from "../components/Alert";
 import ButtonComp from "../components/ButtonComp";
 import Carousel from "../components/Carousel";
 import Dropdown from "../components/Dropdown";
+import LoadingSpinner from "../components/LoadingSpinner";
 import Modal from "../components/Modal";
 import SlideOver from "../components/SlideOver";
+import useGeolocation from "../hooks/useGeolocation";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +30,12 @@ export default function Home() {
     { label: "Option 2 skdsdj", href: "#" },
     { label: "Option 3 skdjdj", href: "#" },
   ];
+
+  const {
+    loading,
+    error,
+    data: { latitude, longitude },
+  } = useGeolocation();
 
   return (
     <>
@@ -82,39 +90,31 @@ export default function Home() {
             variant="primary"
             clickhandler={() => setIsOpen(true)}
           />
-          <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-            <h2 className="text-2xl font-semibold mb-2">Modal Title</h2>
-            <hr />
-            <div className="pt-4 pb-4 min-h-[200px]">
-              <Alert
-                color="gray"
-                heading="Succesvoll Order"
-                text="You have received a conformation letter"
-              />
-              <p className="pt-4">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
-                aspernatur beatae temporibus aut natus minima tenetur accusamus
-                aperiam ab recusandae. Iure quae, sit deleniti suscipit labore
-                quo nam beatae ullam.
-              </p>
-            </div>
-            <hr />
-            <div className="flex justify-end mt-4">
-              <div className="mr-4">
-                <ButtonComp
-                  label="Decline"
-                  variant="secondary"
-                  clickhandler={() => setIsOpen(false)}
-                />
-              </div>
-
-              <ButtonComp
-                label="Accept"
-                variant="primary"
-                clickhandler={() => setIsOpen(true)}
-              />
-            </div>
+          <Modal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            title="Modal Header"
+            clickhandler={() => console.log("click")}
+          >
+            <Alert
+              color="gray"
+              heading="Succesvoll Order"
+              text="You have received a conformation letter"
+            />
+            <p className="pt-4">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
+              aspernatur beatae temporibus aut natus minima tenetur accusamus
+              aperiam ab recusandae. Iure quae, sit deleniti suscipit labore quo
+              nam beatae ullam.
+            </p>
           </Modal>
+        </div>
+        <div>
+          {loading && <>Loading: <LoadingSpinner /></>}
+          {error?.message}
+        </div>
+        <div>
+          {latitude} and {longitude}
         </div>
       </main>
     </>

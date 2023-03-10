@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { XMarkIcon } from '@heroicons/react/24/solid'
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import ButtonComp from "./ButtonComp";
 
-const Modal = ({ isOpen, onClose, children }) => {
-  const [isAnimating, setIsAnimating] = useState(false)
+const Modal = ({ isOpen, onClose, title, clickhandler, children }) => {
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleAnimationComplete = () => {
-    setIsAnimating(false)
-  }
+    setIsAnimating(false);
+  };
 
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
-      setIsAnimating(true)
-      onClose()
+      setIsAnimating(true);
+      onClose();
     }
-  }
+  };
 
   return (
     <AnimatePresence>
@@ -28,23 +29,43 @@ const Modal = ({ isOpen, onClose, children }) => {
         >
           <motion.div
             className="bg-white rounded-2xl shadow-2xl overflow-hidden z-50 max-w-lg w-full relative p-4"
-            initial={{ y: '-100vh' }}
+            initial={{ y: "-100vh" }}
             animate={{ y: 0 }}
-            exit={{ y: '100vh' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            exit={{ y: "100vh" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
+            <button
+              className="absolute top-0 right-0 p-4 focus:outline-none"
+              onClick={() => {
+                setIsAnimating(true);
+                onClose();
+              }}
+            >
+              <XMarkIcon className="w-8 h-8" />
+            </button>
+            <div>
+              <h2 className="text-2xl font-semibold mb-2">{title}</h2>
+              <hr />
+              <div className="pt-4 pb-4 min-h-[200px]">
+                {children}
+              </div>
+              <hr />
+              <div className="flex justify-end mt-4">
+                <div className="mr-4">
+                  <ButtonComp
+                    label="Decline"
+                    variant="secondary"
+                    clickhandler={() => onClose()}
+                  />
+                </div>
 
-              <button
-                className="absolute top-0 right-0 p-4 focus:outline-none"
-                onClick={() => {
-                  setIsAnimating(true)
-                  onClose()
-                }}
-              >
-               <XMarkIcon className="w-8 h-8" />
-              </button>
-              <div>{children}</div>
-            
+                <ButtonComp
+                  label="Accept"
+                  variant="primary"
+                  clickhandler={clickhandler}
+                />
+              </div>
+            </div>
           </motion.div>
           <motion.div
             className="fixed inset-0 bg-black/50"
@@ -56,7 +77,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         </motion.div>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;
